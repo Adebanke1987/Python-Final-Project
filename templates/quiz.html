@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Quiz Game</h1>
+    <form action="/submit" method="POST">
+        {% for question in questions %}
+        <div>
+            <p>{{ loop.index }}. {{ question["question"] }}</p>
+            {% for key, value in question["options"].items() %}
+            <label>
+                <input type="radio" name="{{ question['question'] }}" value="{{ key }}" required>
+                {{ key }}: {{ value }}
+            </label>
+            {% endfor %}
+        </div>
+        <hr>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
